@@ -4,8 +4,10 @@
 #include "structs.h"
 #include "functions.h"
 
-struct input line;
+#define PI = 3.141592653589793
+#define EARTH_RADIUS = 6378
 
+struct input line;
 
 void test(City cities[], Flight direct_flights[], Query queries[]) {
   printf("%s, %lf, %lf\n", cities[0].name, cities[0].lat, cities[0].lng);
@@ -28,6 +30,8 @@ int main(int argc, char ** argv) {
     scan_queries(queries, line.queries);
 
 
+    /*  */
+    find_better_way(cities, direct_flights, queries);
 
     /* Check next case */
     scanf("%d %d %d", &line.cities, &line.direct_flights, &line.queries);

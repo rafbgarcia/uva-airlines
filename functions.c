@@ -2,8 +2,17 @@
 #include <stdbool.h>
 #include "structs.h"
 
+
+void find_better_way(City cities[], Flight direct_flights[], Query queries[]) {
+  // Percorrer as consultas
+  // Pegar a cidade destino
+  // Checar se algum voo direto tem destino para este destino
+  // Se nao tiver, a rota nao existe
+
+}
+
 bool end(struct input line) {
-  return line.cities + line.direct_flights + line.queries == 0;
+  return (line.cities + line.direct_flights + line.queries) == 0;
 }
 
 void scan_cities(City cities[], int num_cities) {
