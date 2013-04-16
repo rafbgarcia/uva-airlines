@@ -8,26 +8,34 @@
 
 
 void find_better_way(City cities[], Flight direct_flights[], Query queries[]) {
-  /* Percorrer as consultas
-  // Pegar a cidade destino
-  // Checar se algum voo direto tem destino para este destino
-  // Se nao tiver, a rota nao existe*/
+  /*
+  Percorrer as consultas
+  Pegar a cidade destino
+  Checar se algum voo direto tem destino para este destino
+  Se nao tiver, a rota nao existe
+  */
 }
 
-
+/**
+ * Round the number to nearest integer
+ * @example 8.5 => 9
+ */
 int rround(double n) {
-  /* ex: n = 8.34 */
-  int n1 = n; /* 8 */
-  double n2 = n1 + 0.5; /* 8.5 */
-
-  /* se 8.34 >= 8.5 entao retorna 8+1 senao retorna 8 */
-  return (n >= n2) ? n1+1 : n1;
+  int n1 = n;
+  double n2 = n1 + 0.5;
+  return (n >= n2) ? (n1 + 1) : n1;
 }
 
+/**
+ * Converts degrees to radians
+ */
 double deg2rad(double value) {
   return value * pi / 180;
 }
 
+/**
+ * Returns distance between 2 cities
+ */
 int distance_between_cities(City origin, City destination) {
   double result, l1, l2, delta;
 
@@ -40,10 +48,16 @@ int distance_between_cities(City origin, City destination) {
   return rround(result);
 }
 
+/**
+ * Checks if input is the end of the program
+ */
 bool end(struct input line) {
   return (line.cities + line.direct_flights + line.queries) == 0;
 }
 
+/**
+ * Scanf cities
+ */
 void scan_cities(City cities[], int num_cities) {
   City city;
   int i;
@@ -54,6 +68,9 @@ void scan_cities(City cities[], int num_cities) {
   }
 }
 
+/**
+ * Scanf direct flights
+ */
 void scan_direct_flights(Flight direct_flights[], int num_flights) {
   Flight flight;
   int i;
@@ -64,6 +81,9 @@ void scan_direct_flights(Flight direct_flights[], int num_flights) {
   }
 }
 
+/**
+ * Scanf queries
+ */
 void scan_queries(Query queries[], int num_queries) {
   Query query;
   int i;
