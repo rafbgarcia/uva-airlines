@@ -20,7 +20,7 @@ int main(int argc, char ** argv) {
   City origin = {"Sao_Paulo", 23.8500, 90.4000};
   City destination = {"Trutomonte", 22.2500, 91.8333};
 
-  printf("%d\n", distance(origin, destination));
+  printf("%d\n", distance_between_cities(origin, destination));
 
   return 0;
 

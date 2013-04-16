@@ -3,7 +3,7 @@
 
 int rround(double n);
 
-int distance(City origin, City destination);
+int distance_between_cities(City origin, City destination);
 
 double deg2rad(double value);
 

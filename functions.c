@@ -28,7 +28,7 @@ double deg2rad(double value) {
   return value * pi / 180;
 }
 
-int distance(City origin, City destination) {
+int distance_between_cities(City origin, City destination) {
   double result, l1, l2, delta;
 
   l1    = deg2rad(origin.lat);
