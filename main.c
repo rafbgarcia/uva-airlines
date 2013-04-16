@@ -3,33 +3,44 @@
 #include "structs.h"
 #include "functions.h"
 
-struct input line;
+void print_no_route_msg() {
+  printf("no route exists\n");
+}
+void print_case_msg(int count) {
+  printf("Case #%d\n", count);
+}
+void print_distance_msg(int distance) {
+  printf("%d km\n", distance);
+}
 
 int main(int argc, char ** argv) {
+  struct input line;
+  int i, case_count, distance;
 
   scanf("%d %d %d", &line.cities, &line.direct_flights, &line.queries);
 
-  /*
-  Dhaka 23.8500 90.4000
-  Chittagong 22.2500 91.8333
-  */
-  City o = {"Dhaka", 23.8500, 90.4000};
-  City d = {"Chittagong", 22.2500, 91.8333};
-  printf("%d\n", distance_between_cities(o, d));
+  City   cities[line.cities];
+  Flight direct_flights[line.direct_flights];
+  Flight queries[line.queries];
 
+  case_count = 1;
   while( ! end(line)) {
-    City   cities[line.cities];
-    Flight direct_flights[line.direct_flights];
-    Flight  queries[line.queries];
-
-    /* Populate variables with inputs */
     scan_cities(cities, line.cities);
     scan_direct_flights(direct_flights, line.direct_flights);
     scan_queries(queries, line.queries);
 
+    print_case_msg(case_count++);
 
-    /* Finds better way */
-    find_better_way(cities, direct_flights, queries);
+    /* Finds better route */
+    for(i = 0; i < line.queries; i++) {
+      distance = best_route_distance(queries[i], direct_flights, cities, line);
+
+      if(distance != -1) {
+        print_distance_msg(distance);
+      } else {
+        print_no_route_msg();
+      }
+    }
 
 
     /* Check next case */

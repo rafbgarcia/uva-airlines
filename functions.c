@@ -11,17 +11,46 @@
 /* Fazer um malloc nisso aqui */
 Flight memoize[10000];
 
-void find_better_way(City cities[], Flight direct_flights[], Flight queries[]) {
-  /*
-  Percorrer as consultas
-  Pegar a cidade destino
-  Checar se algum voo direto tem destino para este destino
-  Se nao tiver, a rota nao existe
-  */
+/**
+ * Finds best route distance
+ * @return int distance; -1 if there is no route
+ */
+int best_route_distance(Flight query, Flight direct_flights[], City cities[], struct input line) {
+  int direct_flight = direct_flight_distance(query, direct_flights, cities, line);
+
+  if(direct_flight != -1) {
+    return direct_flight;
+  }
+
+  /*Flight routes[] = find_possible_routes();*/
+  return -1;
 }
 
-bool route_exists() {
+/**
+ * Check if exist a direct flight
+ * @return int the distance if flight exists; -1 otherwise
+ */
+int direct_flight_distance(Flight query, Flight direct_flights[], City cities[], struct input line) {
+  int i = 0, j = 0;
 
+  for(; i < line.direct_flights; i++) {
+    if(strcmp(query.origin, direct_flights[i].origin) == 0
+        && strcmp(query.destination, direct_flights[i].destination) == 0) {
+      /* Find cities by name */
+      City origin, destination;
+
+      for(; j < line.cities; j++) {
+        if(strcmp(cities[j].name, query.origin) == 0) {
+          origin = cities[j];
+        } else if(strcmp(cities[j].name, query.destination) == 0) {
+          destination = cities[j];
+        }
+      }
+
+      return distance_between_cities(origin, destination);
+    }
+  }
+  return -1;
 }
 
 /**

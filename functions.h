@@ -13,6 +13,12 @@ int rround(double n);
 int distance_between_cities(City origin, City destination);
 
 /**
+ * Check if exist a direct flight
+ * @return int the distance if flight exists; -1 otherwise
+ */
+int direct_flight_distance(Flight query, Flight direct_flights[], City cities[], struct input line);
+
+/**
  * Converts degrees to radians
  */
 double deg2rad(double value);
