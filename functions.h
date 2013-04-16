@@ -35,4 +35,4 @@ void scan_direct_flights(Flight direct_flights[], int num_flights);
 /**
  * Scanf queries
  */
-void scan_queries(Query queries[], int num_queries);
+void scan_queries(Flight queries[], int num_queries);

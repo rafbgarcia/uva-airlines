@@ -10,12 +10,8 @@ typedef struct City {
 typedef struct Flight {
   char origin[20];
   char destination[20];
+  int distance;
 } Flight;
-
-typedef struct Query {
-  char origin[20];
-  char destination[20];
-} Query;
 
 struct input {
   int cities;

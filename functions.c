@@ -7,13 +7,21 @@
 #define earth_radius 6378
 
 
-void find_better_way(City cities[], Flight direct_flights[], Query queries[]) {
+/* Utilizar memoization se der tempo */
+/* Fazer um malloc nisso aqui */
+Flight memoize[10000];
+
+void find_better_way(City cities[], Flight direct_flights[], Flight queries[]) {
   /*
   Percorrer as consultas
   Pegar a cidade destino
   Checar se algum voo direto tem destino para este destino
   Se nao tiver, a rota nao existe
   */
+}
+
+bool route_exists() {
+
 }
 
 /**
@@ -84,8 +92,8 @@ void scan_direct_flights(Flight direct_flights[], int num_flights) {
 /**
  * Scanf queries
  */
-void scan_queries(Query queries[], int num_queries) {
-  Query query;
+void scan_queries(Flight queries[], int num_queries) {
+  Flight query;
   int i;
 
   for(i = 0; i < num_queries; i++) {
