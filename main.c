@@ -19,19 +19,23 @@ int main(int argc, char ** argv) {
 
   scanf("%d %d %d", &line.cities, &line.direct_flights, &line.queries);
 
-  City   cities[line.cities];
-  Flight direct_flights[line.direct_flights];
-  Flight queries[line.queries];
-
   case_count = 1;
   while( ! end(line)) {
+    if(case_count > 1) {
+      printf("\n");
+    }
+
+    City   cities[line.cities];
+    Flight direct_flights[line.direct_flights];
+    Flight queries[line.queries];
+
     scan_cities(cities, line.cities);
     scan_direct_flights(direct_flights, line.direct_flights);
     scan_queries(queries, line.queries);
 
     print_case_msg(case_count++);
 
-    /* Finds better route */
+    /* Find better route */
     for(i = 0; i < line.queries; i++) {
       distance = best_route_distance(queries[i], direct_flights, cities, line);
 
@@ -42,10 +46,8 @@ int main(int argc, char ** argv) {
       }
     }
 
-
     /* Check next case */
     scanf("%d %d %d", &line.cities, &line.direct_flights, &line.queries);
-
   }
 
   return EXIT_SUCCESS;
