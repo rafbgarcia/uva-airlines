@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include "structs.h"
 #include "functions.h"
 
-#define PI = 3.141592653589793
-#define EARTH_RADIUS = 6378
 
 struct input line;
 
@@ -18,6 +15,14 @@ void test(City cities[], Flight direct_flights[], Query queries[]) {
 
 int main(int argc, char ** argv) {
   scanf("%d %d %d", &line.cities, &line.direct_flights, &line.queries);
+
+
+  City origin = {"Sao_Paulo", 23.8500, 90.4000};
+  City destination = {"Trutomonte", 22.2500, 91.8333};
+
+  printf("%d\n", distance(origin, destination));
+
+  return 0;
 
   while( ! end(line)) {
     City   cities[line.cities];

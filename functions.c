@@ -1,14 +1,43 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include "structs.h"
+
+#define pi 3.141592653589793
+#define earth_radius 6378
 
 
 void find_better_way(City cities[], Flight direct_flights[], Query queries[]) {
-  // Percorrer as consultas
+  /* Percorrer as consultas
   // Pegar a cidade destino
   // Checar se algum voo direto tem destino para este destino
-  // Se nao tiver, a rota nao existe
+  // Se nao tiver, a rota nao existe*/
+}
 
+
+int rround(double n) {
+  /* ex: n = 8.34 */
+  int n1 = n; /* 8 */
+  double n2 = n1 + 0.5; /* 8.5 */
+
+  /* se 8.34 >= 8.5 entao retorna 8+1 senao retorna 8 */
+  return (n >= n2) ? n1+1 : n1;
+}
+
+double deg2rad(double value) {
+  return value * pi / 180;
+}
+
+int distance(City origin, City destination) {
+  double result, l1, l2, delta;
+
+  l1    = deg2rad(origin.lat);
+  l2    = deg2rad(destination.lat);
+  delta = deg2rad(destination.lng - origin.lng);
+
+  result = acos(sin(l2) * sin(l1) + cos(l2) * cos(l1) * cos(delta)) * earth_radius;
+
+  return rround(result);
 }
 
 bool end(struct input line) {
