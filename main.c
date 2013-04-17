@@ -1,11 +1,13 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 #define PI 3.141592653589793
 #define EARTH_RADIUS 6378
+#define MAXNODES 100
+#define INFINITY 99999
+#define MEMBER 1
+#define NONMEMBER 0
 
 /***************************
  * Structs
@@ -122,30 +124,14 @@ int rround(double n) {
   return (n >= n2) ? (n1 + 1) : n1;
 }
 
-bool end(struct input line) {
-  return (line.cities + line.direct_flights + line.queries) == 0;
+int end(struct input line) {
+  return (line.cities + line.direct_flights + line.queries) == 0 ? 1 : 0;
 }
 
-int direct_flight_distance(Flight query, Flight direct_flights[], struct input line) {
-  int i = 0;
-
-  for(; i < line.direct_flights; i++) {
-    if(strcmp(query.origin.name, direct_flights[i].origin.name) == 0 &&
-       strcmp(query.destination.name, direct_flights[i].destination.name) == 0) {
-      return distance_between_cities(query.origin, query.destination);
-    }
-  }
-  return -1;
-}
 
 /********************
 *** DIJKSTRA
 ****************/
-
-#define MAXNODES 100
-#define INFINITY 1000000
-#define MEMBER 1
-#define NONMEMBER 0
 
 typedef struct graph GRAPH;
 struct arc {
@@ -176,15 +162,6 @@ void joinwt(GRAPH *g, int node1, int node2, int wt) {
   g->arcs[node1][node2].adj = 1;
   g->arcs[node1][node2].weight = wt;
 }
-
-/* remove uma aresta do grafo; */
-/* recebe o grafo e os dois nós (node1 e node2); */
-/*
-void remove(GRAPH *g, int node1, int node2) {
-  g->arcs[node1][node2].adj = 0;
-  g->arcs[node1][node2].weight = INFINITY;
-}
-*/
 
 int dijkstra(GRAPH *g, int s, int t) {
   int dist[MAXNODES], perm[MAXNODES], path[MAXNODES];
