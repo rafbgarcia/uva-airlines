@@ -2,6 +2,7 @@
 #define STRUCTS_H_
 
 typedef struct City {
+  int id;
   char name[20];
   double lat;
   double lng;

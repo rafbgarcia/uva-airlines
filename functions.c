@@ -22,22 +22,65 @@ int best_route_distance(Flight query, Flight direct_flights[], City cities[], st
     return direct_flight;
   }
 
-  /* Dijkstra
-  // Preencher distancia dos voos
-  // Percorrer voos
-  n := -1
-  visitados =
-  para cada voos |i|
-    voo[i].distancia = distance_between_cities(voo.origin, voo.destino)
-  end
 
-  para cada voo |i|
-    se (voo nao foi visitado) e (distancia do voo anterior MENOR QUE distancia voo[i])
-      n = i
-    end
-  end
-  */
-  /*Flight routes[] = find_possible_routes();*/
+
+  /* Dijkstra */
+  int i, n, j, MAX, ARESTAS;
+
+  MAX     = line.cities;
+  ARESTAS = line.direct_flights;
+
+  int routes[ARESTAS][ARESTAS];
+  char vis[MAX];
+  int dis[MAX];
+  memset(vis, 0, sizeof(vis));
+  memset(dis, 0x7f, sizeof (dis));
+
+  dis[0] = 0;
+
+  Flight *df = direct_flights;
+
+  /* Inicia matriz */
+  for(i = 0; i < ARESTAS; i++){
+    for(j = 0; j < ARESTAS; j++)
+      routes[i][j] = 0;
+  }
+
+  /* Preenche matriz */
+  for(i = 0; i < ARESTAS; i++) {
+    routes[df[i].origin.id][df[i].destination.id] = df[i].distance;
+  }
+
+  while(1) {
+    n = -1;
+
+    for(i = 0; i < MAX; i++) {
+      if(!vis[i] && (n < 0 || df[i].distance < df[n].distance))
+        n = i;
+    }
+
+    if(n < 0)
+      break;
+
+    vis[n] = 1;
+
+    for(i = 0; i < ARESTAS; i++) {
+      if(routes[n][i] > 0 && dis[i] > dis[n] + routes[n][i]){
+        dis[i] = dis[n] + routes[n][i];
+      }
+    }
+  }
+
+  int sum = 0;
+  for(i = 0; i < MAX; i++) {
+    /*printf("%i => %d\n", i, dis[i]);*/
+    sum += dis[i];
+  }
+
+  if(sum > 0) {
+    return sum;
+  }
+
   return -1;
 }
 
@@ -88,13 +131,9 @@ void scan_cities(City cities[], int num_cities) {
 
   for(i = 0; i < num_cities; i++) {
     scanf("%s %lf %lf", city.name, &city.lat, &city.lng);
+    city.id = i;
     cities[i] = city;
   }
-}
-
-
-void populate_flight(Flight flight, char * origin, char * destination) {
-
 }
 
 /**
@@ -108,7 +147,6 @@ void scan_direct_flights(Flight direct_flights[], City cities[], struct input li
   for(i = 0; i < line.direct_flights; i++) {
     scanf("%s %s", origin, destination);
 
-    /*populate_flight(direct_flights[0]);*/
     /* Find city by name */
     for(j = 0; j < line.cities; j++) {
       if(strcmp(cities[j].name, origin) == 0) {
@@ -134,6 +172,7 @@ void scan_queries(Flight queries[], City cities[], struct input line) {
   for(i = 0; i < line.queries; i++) {
     scanf("%s %s", origin, destination);
 
+    /* Find city by name */
     for(j = 0; j < line.cities; j++) {
       if(strcmp(cities[j].name, origin) == 0) {
         query.origin = cities[j];
@@ -141,11 +180,10 @@ void scan_queries(Flight queries[], City cities[], struct input line) {
         query.destination = cities[j];
       }
     }
+
     queries[i] = query;
   }
 }
-
-
 
 /**
  * Round the number to nearest integer
@@ -156,7 +194,6 @@ int rround(double n) {
   double n2 = n1 + 0.5;
   return (n >= n2) ? (n1 + 1) : n1;
 }
-
 
 /**
  * Checks if input is the end of the program
