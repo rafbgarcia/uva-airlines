@@ -249,12 +249,6 @@ int dijkstra(GRAPH *g, int s, int t) {
 ****************/
 
 int best_route_distance(Flight query, Flight direct_flights[], struct input line) {
-  int direct_flight = direct_flight_distance(query, direct_flights, line);
-
-  if(direct_flight != -1) {
-    return direct_flight;
-  }
-
   GRAPH *graph;
   graph = init_graph();
 
