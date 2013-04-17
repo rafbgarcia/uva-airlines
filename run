@@ -1,12 +1,5 @@
 #!/bin/bash
 
 set -e
-
-# com warnings
-# gcc -Wall -ansi $1 -o out -lm
-
-# sem warnings
-#gcc -ansi $1 functions.c functions.h structs.c -o out -lm
-#gcc -ansi $1 structs.h functions.c functions.h -o out -lm
 gcc -ansi $1 -o out -lm
 ./out
