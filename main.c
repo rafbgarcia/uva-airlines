@@ -210,13 +210,12 @@ int dijkstra(GRAPH *g, int s, int t) {
     /* embora estamos assumindo grafos ponderados e conexos, este if garante que
      em caso de não existência de um caminho o programa não entre em loop infinito */
     if (current == k) {
-        return -1;
+      return -1;
     }
 
     current = k;
     perm[current] = MEMBER;
   }
-
   return dist[t];
 }
 
@@ -229,7 +228,7 @@ int best_route_distance(Flight query, Flight direct_flights[], struct input line
   GRAPH *graph;
   graph = init_graph();
 
-  int i,j, num_df;
+  int i, j, num_df;
   num_df = line.direct_flights;
 
   for(i = 0; i < num_df; i++) {
@@ -272,7 +271,6 @@ int main(int argc, char ** argv) {
 
     print_case_msg(case_count++);
 
-    /* Find better route */
     for(i = 0; i < line.queries; i++) {
       distance = best_route_distance(queries[i], direct_flights, line);
 
