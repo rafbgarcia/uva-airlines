@@ -1,0 +1,44 @@
+
+int i, n, j, MAX;
+
+MAX = line.cities;
+
+int routes[MAX][MAX];
+char vis[MAX];
+int dis[MAX];
+memset(vis, 0, sizeof(vis));
+memset(dis, 0x7f, sizeof (dis));
+
+Flight *df = direct_flights;
+
+/* Inicia matriz */
+for(i = 0; i < MAX; i++){
+  for(j = 0; j < MAX; j++)
+    routes[i][j] = 0;
+}
+
+/* Preenche matriz */
+for(i = 0; i < MAX; i++) {
+  routes[df[i].origin.id][df[i].destination.id] = df[i].distance;
+}
+
+dis[query.origin.id] = 0;
+while(1) {
+  n = -1;
+
+  for(i = 0; i < MAX; i++) {
+    if(!vis[i] && (n < 0 || dis[i] < dis[n]))
+      n = i;
+  }
+
+  if(n < 0)
+    break;
+
+  vis[n] = 1;
+
+  for(i = 0; i < MAX; i++) {
+    if(routes[n][i] && dis[i] > dis[n] + routes[n][i]){
+      dis[i] = dis[n] + routes[n][i];
+    }
+  }
+}

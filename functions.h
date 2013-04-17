@@ -2,6 +2,8 @@
 #include "structs.h"
 
 
+int best_route_distance(Flight query, Flight direct_flights[], struct input line);
+
 /**
  * Round the number to nearest integer
  * @example 8.5 => 9

@@ -11,11 +11,16 @@
 /* Fazer um malloc nisso aqui */
 Flight memoize[10000];
 
+
+void dijkstra(int start, int end) {
+  int dist[MAX]
+}
+
 /**
  * Finds best route distance
  * @return int distance; -1 if there is no route
  */
-int best_route_distance(Flight query, Flight direct_flights[], City cities[], struct input line) {
+int best_route_distance(Flight query, Flight direct_flights[], struct input line) {
   int direct_flight = direct_flight_distance(query, direct_flights, line);
 
   if(direct_flight != -1) {
@@ -25,51 +30,7 @@ int best_route_distance(Flight query, Flight direct_flights[], City cities[], st
 
 
   /* Dijkstra */
-  int i, n, j, MAX, ARESTAS;
-
-  MAX     = line.cities;
-  ARESTAS = line.direct_flights;
-
-  int routes[ARESTAS][ARESTAS];
-  char vis[MAX];
-  int dis[MAX];
-  memset(vis, 0, sizeof(vis));
-  memset(dis, 0x7f, sizeof (dis));
-
-  dis[0] = 0;
-
-  Flight *df = direct_flights;
-
-  /* Inicia matriz */
-  for(i = 0; i < ARESTAS; i++){
-    for(j = 0; j < ARESTAS; j++)
-      routes[i][j] = 0;
-  }
-
-  /* Preenche matriz */
-  for(i = 0; i < ARESTAS; i++) {
-    routes[df[i].origin.id][df[i].destination.id] = df[i].distance;
-  }
-
-  while(1) {
-    n = -1;
-
-    for(i = 0; i < MAX; i++) {
-      if(!vis[i] && (n < 0 || df[i].distance < df[n].distance))
-        n = i;
-    }
-
-    if(n < 0)
-      break;
-
-    vis[n] = 1;
-
-    for(i = 0; i < ARESTAS; i++) {
-      if(routes[n][i] > 0 && dis[i] > dis[n] + routes[n][i]){
-        dis[i] = dis[n] + routes[n][i];
-      }
-    }
-  }
+  dijkstra();
 
   int sum = 0;
   for(i = 0; i < MAX; i++) {
