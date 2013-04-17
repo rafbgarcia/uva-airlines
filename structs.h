@@ -8,8 +8,8 @@ typedef struct City {
 } City;
 
 typedef struct Flight {
-  char origin[20];
-  char destination[20];
+  City origin;
+  City destination;
   int distance;
 } Flight;
 

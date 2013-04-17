@@ -30,8 +30,8 @@ int main(int argc, char ** argv) {
     Flight queries[line.queries];
 
     scan_cities(cities, line.cities);
-    scan_direct_flights(direct_flights, line.direct_flights);
-    scan_queries(queries, line.queries);
+    scan_direct_flights(direct_flights, cities, line);
+    scan_queries(queries, cities, line);
 
     print_case_msg(case_count++);
 
